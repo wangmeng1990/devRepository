@@ -1,0 +1,6 @@
+com\yinuo\gateway\filter\LoginFilter.class
+com\yinuo\gateway\YinuoGatewayApplication.class
+com\yinuo\gateway\config\FilterProperties.class
+com\yinuo\gateway\config\ZuulJwtProperties.class
+META-INF\spring-configuration-metadata.json
+com\yinuo\gateway\config\YinuoCorsConfiguration.class

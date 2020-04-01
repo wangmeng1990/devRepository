@@ -1,0 +1,39 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.yinuo.bigdata.system.mapper.DictionarieMapper" >
+
+    <resultMap id="dictionarieMap" type="com.inuol.bigdata.ext.TBigdataDictionarieNode">
+            <id property="id" column="one_id"></id>
+            <result property="dictionaryName" column="one_pname"></result>
+            <collection property="children" ofType="com.inuol.bigdata.ext.TBigdataDictionarieNode">
+                <id property="id" column="two_id"></id>
+                <result property="dictionaryName" column="two_pname"></result>
+                <result property="sortId" column="two_sortid"></result>
+                <result property="warningLevel" column="three_warningLevel"></result>
+            </collection>
+    </resultMap>
+
+    <select id="dictionarieList" parameterType="java.lang.String"  resultMap="dictionarieMap">
+        /*select
+        a.id one_id,
+        a.dictionary_name one_pname,
+        b.id two_id,
+        b.dictionary_name two_pname,
+        b.sort_id two_sortid,
+		c.dictionary_name three_pname
+        FROM t_bigdata_dictionarie a JOIN t_bigdata_dictionarie b
+        ON a.id = b.parent_id JOIN t_bigdata_dictionarie c ON b.warning_level = c.id
+        ORDER BY a.sort_id,b.sort_id*/
+        select
+        a.id one_id,
+        a.dictionary_name one_pname,
+        b.id two_id,
+        b.dictionary_name two_pname,
+        b.sort_id two_sortid,
+		b.warning_level three_warningLevel
+        FROM t_bigdata_dictionarie a JOIN t_bigdata_dictionarie b
+        ON a.id = b.parent_id
+        ORDER BY a.sort_id,b.sort_id
+    </select>
+
+</mapper>

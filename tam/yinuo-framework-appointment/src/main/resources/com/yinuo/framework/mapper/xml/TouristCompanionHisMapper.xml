@@ -1,0 +1,374 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.yinuo.appointment.mapper.TouristCompanionHisMapper">
+  <resultMap id="BaseResultMap" type="com.inuol.entity.TouristCompanionHis">
+    <id column="id" jdbcType="BIGINT" property="id" />
+    <result column="uid" jdbcType="INTEGER" property="uid" />
+    <result column="name" jdbcType="VARCHAR" property="name" />
+    <result column="mobile" jdbcType="VARCHAR" property="mobile" />
+    <result column="first_name" jdbcType="VARCHAR" property="firstName" />
+    <result column="second_name" jdbcType="VARCHAR" property="secondName" />
+    <result column="nationality" jdbcType="VARCHAR" property="nationality" />
+    <result column="id_type" jdbcType="VARCHAR" property="idType" />
+    <result column="id_card" jdbcType="VARCHAR" property="idCard" />
+    <result column="Id_front" jdbcType="VARCHAR" property="idFront" />
+    <result column="Id_back" jdbcType="VARCHAR" property="idBack" />
+    <result column="validity" jdbcType="VARCHAR" property="validity" />
+    <result column="be_self" jdbcType="INTEGER" property="beSelf" />
+    <result column="create_date" jdbcType="TIMESTAMP" property="createDate" />
+    <result column="update_date" jdbcType="TIMESTAMP" property="updateDate" />
+  </resultMap>
+  <sql id="Example_Where_Clause">
+    <where>
+      <foreach collection="oredCriteria" item="criteria" separator="or">
+        <if test="criteria.valid">
+          <trim prefix="(" prefixOverrides="and" suffix=")">
+            <foreach collection="criteria.criteria" item="criterion">
+              <choose>
+                <when test="criterion.noValue">
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue">
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue">
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue">
+                  and ${criterion.condition}
+                  <foreach close=")" collection="criterion.value" item="listItem" open="(" separator=",">
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Update_By_Example_Where_Clause">
+    <where>
+      <foreach collection="example.oredCriteria" item="criteria" separator="or">
+        <if test="criteria.valid">
+          <trim prefix="(" prefixOverrides="and" suffix=")">
+            <foreach collection="criteria.criteria" item="criterion">
+              <choose>
+                <when test="criterion.noValue">
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue">
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue">
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue">
+                  and ${criterion.condition}
+                  <foreach close=")" collection="criterion.value" item="listItem" open="(" separator=",">
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Base_Column_List">
+    id, uid, name, mobile, first_name, second_name, nationality, id_type, id_card, Id_front, 
+    Id_back, validity, be_self, create_date, update_date
+  </sql>
+  <select id="selectByExample" parameterType="com.inuol.entity.TouristCompanionHisCriteria" resultMap="BaseResultMap">
+    select
+    <if test="distinct">
+      distinct
+    </if>
+    <include refid="Base_Column_List" />
+    from t_tourist_companion_his
+    <if test="_parameter != null">
+      <include refid="Example_Where_Clause" />
+    </if>
+    <if test="orderByClause != null">
+      order by ${orderByClause}
+    </if>
+  </select>
+  <select id="selectByPrimaryKey" parameterType="java.lang.Long" resultMap="BaseResultMap">
+    select 
+    <include refid="Base_Column_List" />
+    from t_tourist_companion_his
+    where id = #{id,jdbcType=BIGINT}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Long">
+    delete from t_tourist_companion_his
+    where id = #{id,jdbcType=BIGINT}
+  </delete>
+  <delete id="deleteByExample" parameterType="com.inuol.entity.TouristCompanionHisCriteria">
+    delete from t_tourist_companion_his
+    <if test="_parameter != null">
+      <include refid="Example_Where_Clause" />
+    </if>
+  </delete>
+  <insert id="insert" parameterType="com.inuol.entity.TouristCompanionHis">
+    insert into t_tourist_companion_his (id, uid, name, 
+      mobile, first_name, second_name, 
+      nationality, id_type, id_card, 
+      Id_front, Id_back, validity, 
+      be_self, create_date, update_date
+      )
+    values (#{id,jdbcType=BIGINT}, #{uid,jdbcType=INTEGER}, #{name,jdbcType=VARCHAR}, 
+      #{mobile,jdbcType=VARCHAR}, #{firstName,jdbcType=VARCHAR}, #{secondName,jdbcType=VARCHAR}, 
+      #{nationality,jdbcType=VARCHAR}, #{idType,jdbcType=VARCHAR}, #{idCard,jdbcType=VARCHAR}, 
+      #{idFront,jdbcType=VARCHAR}, #{idBack,jdbcType=VARCHAR}, #{validity,jdbcType=VARCHAR}, 
+      #{beSelf,jdbcType=INTEGER}, #{createDate,jdbcType=TIMESTAMP}, #{updateDate,jdbcType=TIMESTAMP}
+      )
+  </insert>
+  <insert id="insertSelective" parameterType="com.inuol.entity.TouristCompanionHis">
+    insert into t_tourist_companion_his
+    <trim prefix="(" suffix=")" suffixOverrides=",">
+      <if test="id != null">
+        id,
+      </if>
+      <if test="uid != null">
+        uid,
+      </if>
+      <if test="name != null">
+        name,
+      </if>
+      <if test="mobile != null">
+        mobile,
+      </if>
+      <if test="firstName != null">
+        first_name,
+      </if>
+      <if test="secondName != null">
+        second_name,
+      </if>
+      <if test="nationality != null">
+        nationality,
+      </if>
+      <if test="idType != null">
+        id_type,
+      </if>
+      <if test="idCard != null">
+        id_card,
+      </if>
+      <if test="idFront != null">
+        Id_front,
+      </if>
+      <if test="idBack != null">
+        Id_back,
+      </if>
+      <if test="validity != null">
+        validity,
+      </if>
+      <if test="beSelf != null">
+        be_self,
+      </if>
+      <if test="createDate != null">
+        create_date,
+      </if>
+      <if test="updateDate != null">
+        update_date,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides=",">
+      <if test="id != null">
+        #{id,jdbcType=BIGINT},
+      </if>
+      <if test="uid != null">
+        #{uid,jdbcType=INTEGER},
+      </if>
+      <if test="name != null">
+        #{name,jdbcType=VARCHAR},
+      </if>
+      <if test="mobile != null">
+        #{mobile,jdbcType=VARCHAR},
+      </if>
+      <if test="firstName != null">
+        #{firstName,jdbcType=VARCHAR},
+      </if>
+      <if test="secondName != null">
+        #{secondName,jdbcType=VARCHAR},
+      </if>
+      <if test="nationality != null">
+        #{nationality,jdbcType=VARCHAR},
+      </if>
+      <if test="idType != null">
+        #{idType,jdbcType=VARCHAR},
+      </if>
+      <if test="idCard != null">
+        #{idCard,jdbcType=VARCHAR},
+      </if>
+      <if test="idFront != null">
+        #{idFront,jdbcType=VARCHAR},
+      </if>
+      <if test="idBack != null">
+        #{idBack,jdbcType=VARCHAR},
+      </if>
+      <if test="validity != null">
+        #{validity,jdbcType=VARCHAR},
+      </if>
+      <if test="beSelf != null">
+        #{beSelf,jdbcType=INTEGER},
+      </if>
+      <if test="createDate != null">
+        #{createDate,jdbcType=TIMESTAMP},
+      </if>
+      <if test="updateDate != null">
+        #{updateDate,jdbcType=TIMESTAMP},
+      </if>
+    </trim>
+  </insert>
+  <select id="countByExample" parameterType="com.inuol.entity.TouristCompanionHisCriteria" resultType="java.lang.Long">
+    select count(*) from t_tourist_companion_his
+    <if test="_parameter != null">
+      <include refid="Example_Where_Clause" />
+    </if>
+  </select>
+  <update id="updateByExampleSelective" parameterType="map">
+    update t_tourist_companion_his
+    <set>
+      <if test="record.id != null">
+        id = #{record.id,jdbcType=BIGINT},
+      </if>
+      <if test="record.uid != null">
+        uid = #{record.uid,jdbcType=INTEGER},
+      </if>
+      <if test="record.name != null">
+        name = #{record.name,jdbcType=VARCHAR},
+      </if>
+      <if test="record.mobile != null">
+        mobile = #{record.mobile,jdbcType=VARCHAR},
+      </if>
+      <if test="record.firstName != null">
+        first_name = #{record.firstName,jdbcType=VARCHAR},
+      </if>
+      <if test="record.secondName != null">
+        second_name = #{record.secondName,jdbcType=VARCHAR},
+      </if>
+      <if test="record.nationality != null">
+        nationality = #{record.nationality,jdbcType=VARCHAR},
+      </if>
+      <if test="record.idType != null">
+        id_type = #{record.idType,jdbcType=VARCHAR},
+      </if>
+      <if test="record.idCard != null">
+        id_card = #{record.idCard,jdbcType=VARCHAR},
+      </if>
+      <if test="record.idFront != null">
+        Id_front = #{record.idFront,jdbcType=VARCHAR},
+      </if>
+      <if test="record.idBack != null">
+        Id_back = #{record.idBack,jdbcType=VARCHAR},
+      </if>
+      <if test="record.validity != null">
+        validity = #{record.validity,jdbcType=VARCHAR},
+      </if>
+      <if test="record.beSelf != null">
+        be_self = #{record.beSelf,jdbcType=INTEGER},
+      </if>
+      <if test="record.createDate != null">
+        create_date = #{record.createDate,jdbcType=TIMESTAMP},
+      </if>
+      <if test="record.updateDate != null">
+        update_date = #{record.updateDate,jdbcType=TIMESTAMP},
+      </if>
+    </set>
+    <if test="_parameter != null">
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByExample" parameterType="map">
+    update t_tourist_companion_his
+    set id = #{record.id,jdbcType=BIGINT},
+      uid = #{record.uid,jdbcType=INTEGER},
+      name = #{record.name,jdbcType=VARCHAR},
+      mobile = #{record.mobile,jdbcType=VARCHAR},
+      first_name = #{record.firstName,jdbcType=VARCHAR},
+      second_name = #{record.secondName,jdbcType=VARCHAR},
+      nationality = #{record.nationality,jdbcType=VARCHAR},
+      id_type = #{record.idType,jdbcType=VARCHAR},
+      id_card = #{record.idCard,jdbcType=VARCHAR},
+      Id_front = #{record.idFront,jdbcType=VARCHAR},
+      Id_back = #{record.idBack,jdbcType=VARCHAR},
+      validity = #{record.validity,jdbcType=VARCHAR},
+      be_self = #{record.beSelf,jdbcType=INTEGER},
+      create_date = #{record.createDate,jdbcType=TIMESTAMP},
+      update_date = #{record.updateDate,jdbcType=TIMESTAMP}
+    <if test="_parameter != null">
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByPrimaryKeySelective" parameterType="com.inuol.entity.TouristCompanionHis">
+    update t_tourist_companion_his
+    <set>
+      <if test="uid != null">
+        uid = #{uid,jdbcType=INTEGER},
+      </if>
+      <if test="name != null">
+        name = #{name,jdbcType=VARCHAR},
+      </if>
+      <if test="mobile != null">
+        mobile = #{mobile,jdbcType=VARCHAR},
+      </if>
+      <if test="firstName != null">
+        first_name = #{firstName,jdbcType=VARCHAR},
+      </if>
+      <if test="secondName != null">
+        second_name = #{secondName,jdbcType=VARCHAR},
+      </if>
+      <if test="nationality != null">
+        nationality = #{nationality,jdbcType=VARCHAR},
+      </if>
+      <if test="idType != null">
+        id_type = #{idType,jdbcType=VARCHAR},
+      </if>
+      <if test="idCard != null">
+        id_card = #{idCard,jdbcType=VARCHAR},
+      </if>
+      <if test="idFront != null">
+        Id_front = #{idFront,jdbcType=VARCHAR},
+      </if>
+      <if test="idBack != null">
+        Id_back = #{idBack,jdbcType=VARCHAR},
+      </if>
+      <if test="validity != null">
+        validity = #{validity,jdbcType=VARCHAR},
+      </if>
+      <if test="beSelf != null">
+        be_self = #{beSelf,jdbcType=INTEGER},
+      </if>
+      <if test="createDate != null">
+        create_date = #{createDate,jdbcType=TIMESTAMP},
+      </if>
+      <if test="updateDate != null">
+        update_date = #{updateDate,jdbcType=TIMESTAMP},
+      </if>
+    </set>
+    where id = #{id,jdbcType=BIGINT}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.inuol.entity.TouristCompanionHis">
+    update t_tourist_companion_his
+    set uid = #{uid,jdbcType=INTEGER},
+      name = #{name,jdbcType=VARCHAR},
+      mobile = #{mobile,jdbcType=VARCHAR},
+      first_name = #{firstName,jdbcType=VARCHAR},
+      second_name = #{secondName,jdbcType=VARCHAR},
+      nationality = #{nationality,jdbcType=VARCHAR},
+      id_type = #{idType,jdbcType=VARCHAR},
+      id_card = #{idCard,jdbcType=VARCHAR},
+      Id_front = #{idFront,jdbcType=VARCHAR},
+      Id_back = #{idBack,jdbcType=VARCHAR},
+      validity = #{validity,jdbcType=VARCHAR},
+      be_self = #{beSelf,jdbcType=INTEGER},
+      create_date = #{createDate,jdbcType=TIMESTAMP},
+      update_date = #{updateDate,jdbcType=TIMESTAMP}
+    where id = #{id,jdbcType=BIGINT}
+  </update>
+  
+  
+  <!-- add new  -->
+  
+</mapper>

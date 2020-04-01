@@ -1,0 +1,12 @@
+server:
+  port: 10121
+# 配置激活的环境
+spring:
+  application:
+    name: yinuo-upload #指定服务名
+  profiles:
+    active: dev
+  servlet:
+    multipart: #文件上传大小限制
+      maxFileSize: 10MB
+      maxRequestSize: 50MB

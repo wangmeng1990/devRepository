@@ -1,0 +1,8 @@
+com\yinuo\framework\controller\TravelController.class
+com\yinuo\framework\controller\TestController.class
+com\yinuo\framework\service\impl\TravelServiceImpl.class
+com\yinuo\framework\config\MyBatisConfig.class
+com\yinuo\framework\mapper\TravelMapper.class
+com\yinuo\framework\service\TravelService.class
+com\yinuo\framework\config\Swagger2Configuration.class
+com\yinuo\framework\YinuoStrategyApplication.class

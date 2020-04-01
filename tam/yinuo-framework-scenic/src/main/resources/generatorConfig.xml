@@ -1,0 +1,50 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE generatorConfiguration
+        PUBLIC "-//mybatis.org//DTD MyBatis Generator Configuration 1.0//EN"
+        "http://mybatis.org/dtd/mybatis-generator-config_1_0.dtd">
+<generatorConfiguration>
+    <!-- 数据库驱动:选择你的本地硬盘上面的数据库驱动包-->
+    <classPathEntry  location="D:\Maven\repository\mysql\mysql-connector-java\5.1.40\mysql-connector-java-5.1.40.jar"/>
+    <context id="context"  targetRuntime="MyBatis3">
+	    <plugin type="org.mybatis.generator.plugins.RenameExampleClassPlugin">
+			<property name="searchString" value="Example$" />
+			<property name="replaceString" value="Criteria" />
+	    </plugin>
+        <commentGenerator>
+            <property name="suppressDate" value="false"/>
+            <!-- 是否去除自动生成的注释 true：是 ： false:否 -->
+            <property name="suppressAllComments" value="false"/>
+        </commentGenerator>
+        <!--数据库链接URL，用户名、密码 -->
+        <jdbcConnection driverClass="com.mysql.jdbc.Driver" connectionURL="jdbc:mysql://115.29.175.45:3306/square" userId="square2019" password="square@2019$$">
+        </jdbcConnection>
+        <javaTypeResolver>
+            <property name="forceBigDecimals" value="false"/>
+        </javaTypeResolver>
+        <!-- 生成模型的包名和位置-->
+        <javaModelGenerator targetPackage="com.inuol.entity.scenic" targetProject="src/test/java">
+            <property name="enableSubPackages" value="true"/>
+            <property name="trimStrings" value="true"/>
+        </javaModelGenerator>
+        <!-- 生成映射文件的包名和位置-->
+        <sqlMapGenerator targetPackage="com.yinuo.scenic.mapper.xml" targetProject="src/test/java">
+            <property name="enableSubPackages" value="true"/>
+        </sqlMapGenerator>
+        <!-- 生成DAO的包名和位置-->
+        <javaClientGenerator type="XMLMAPPER" targetPackage="com.yinuo.scenic.mapper" targetProject="src/test/java">
+            <property name="enableSubPackages" value="true"/>
+        </javaClientGenerator>
+        <!-- 要生成的表 tableName是数据库中的表名或视图名 domainObjectName是实体类名-->
+        <table tableName="t_route" domainObjectName="Route"/>
+        <table tableName="t_route_set" domainObjectName="RouteSet"/>
+        <table tableName="t_scenic_area" domainObjectName="ScenicArea"/>
+        <table tableName="t_scenic_label" domainObjectName="ScenicLabel"/>
+        <table tableName="t_scenic_photo" domainObjectName="ScenicPhoto"/>
+        <table tableName="t_scenic_spot" domainObjectName="ScenicSpot"/>
+        <table tableName="t_tourism_help" domainObjectName="TourismHelp"/>
+        <table tableName="t_help_detail" domainObjectName="HelpDetail"/>
+        <table tableName="t_vr" domainObjectName="Vr"/>
+        <table tableName="t_channel" domainObjectName="Channel"/>
+    </context>
+</generatorConfiguration>
+

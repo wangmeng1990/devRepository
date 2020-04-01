@@ -1,0 +1,8 @@
+com\yinuo\auth\config\Swagger2Config.class
+com\yinuo\auth\config\YinuoCorsConfiguration.class
+com\yinuo\auth\service\AuthService.class
+com\yinuo\auth\YinuoAuthApplication.class
+com\yinuo\auth\client\UserClient.class
+com\yinuo\auth\controller\AuthController.class
+com\yinuo\auth\config\JwtProperties.class
+META-INF\spring-configuration-metadata.json

@@ -1,0 +1,10 @@
+Manifest-Version: 1.0
+Implementation-Title: yinuo-framework-auth
+Implementation-Version: 1.0-SNAPSHOT
+Built-By: wangmeng
+Implementation-Vendor-Id: com.yinuo.tiananmen
+Build-Jdk: 1.8.0_111
+Implementation-URL: https://projects.spring.io/spring-boot/#/spring-bo
+ ot-starter-parent/yinuo-framework-parent/yinuo-framework-auth
+Created-By: Maven Integration for Eclipse
+
