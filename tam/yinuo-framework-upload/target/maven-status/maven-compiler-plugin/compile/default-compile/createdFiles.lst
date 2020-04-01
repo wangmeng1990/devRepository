@@ -1,9 +1,0 @@
-com\yinuo\upload\congfig\CorsConfig.class
-com\yinuo\upload\service\UploadService.class
-com\yinuo\upload\UploadApplication.class
-com\yinuo\upload\service\impl\UploadServiceImpl.class
-com\yinuo\upload\congfig\Swagger2Configuration.class
-com\yinuo\upload\client\FastDFSClient.class
-com\yinuo\upload\client\FastDFSClient$DownloadStream.class
-com\yinuo\upload\client\UploadHelper.class
-com\yinuo\upload\controller\UploadController.class

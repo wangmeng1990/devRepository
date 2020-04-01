@@ -1,7 +1,0 @@
-com\yinuo\bigdata\system\service\RolesManageService.class
-com\yinuo\bigdata\system\controller\SystemController.class
-com\yinuo\bigdata\system\service\DepartmentService.class
-com\yinuo\bigdata\system\mapper\DepartmentMapper.class
-com\yinuo\bigdata\system\config\MyBatisConfig.class
-com\yinuo\bigdata\system\BigDataSystemApplication.class
-com\yinuo\bigdata\system\config\Swagger2Config.class
