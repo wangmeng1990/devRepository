@@ -1,0 +1,905 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.ark.hngxt.product.mapper.CreditProductMapper">
+  <resultMap id="BaseResultMap" type="com.ark.hngxt.product.domain.CreditProduct">
+    <id column="id" jdbcType="BIGINT" property="id" />
+    <result column="name" jdbcType="VARCHAR" property="name" />
+    <result column="type" jdbcType="VARCHAR" property="type" />
+    <result column="organization" jdbcType="VARCHAR" property="organization" />
+    <result column="organization_id" jdbcType="BIGINT" property="organizationId" />
+    <result column="parent_organization" jdbcType="VARCHAR" property="parentOrganization" />
+    <result column="parent_organization_id" jdbcType="BIGINT" property="parentOrganizationId" />
+    <result column="amount_start" jdbcType="DECIMAL" property="amountStart" />
+    <result column="amount_end" jdbcType="DECIMAL" property="amountEnd" />
+    <result column="interest_rate_start" jdbcType="DECIMAL" property="interestRateStart" />
+    <result column="interest_rate_end" jdbcType="DECIMAL" property="interestRateEnd" />
+    <result column="limit_start" jdbcType="INTEGER" property="limitStart" />
+    <result column="limit_end" jdbcType="INTEGER" property="limitEnd" />
+    <result column="credit_level" jdbcType="VARCHAR" property="creditLevel" />
+    <result column="credit_level_code" jdbcType="VARCHAR" property="creditLevelCode" />
+    <result column="img" jdbcType="VARCHAR" property="img" />
+    <result column="be_hot" jdbcType="INTEGER" property="beHot" />
+    <result column="be_main_hot" jdbcType="INTEGER" property="beMainHot" />
+    <result column="be_main_hot_sort" jdbcType="INTEGER" property="beMainHotSort" />
+    <result column="be_main_hot_app" jdbcType="INTEGER" property="beMainHotApp" />
+    <result column="be_hot_app" jdbcType="INTEGER" property="beHotApp" />
+    <result column="be_main_hot_app_sort" jdbcType="INTEGER" property="beMainHotAppSort" />
+    <result column="be_top" jdbcType="INTEGER" property="beTop" />
+    <result column="apply_count" jdbcType="BIGINT" property="applyCount" />
+    <result column="apply_rate" jdbcType="VARCHAR" property="applyRate" />
+    <result column="total_amount" jdbcType="DECIMAL" property="totalAmount" />
+    <result column="apply_rate_true" jdbcType="VARCHAR" property="applyRateTrue" />
+    <result column="total_amount_true" jdbcType="DECIMAL" property="totalAmountTrue" />
+    <result column="be_special" jdbcType="INTEGER" property="beSpecial" />
+    <result column="credit_model" jdbcType="VARCHAR" property="creditModel" />
+    <result column="rating_model" jdbcType="VARCHAR" property="ratingModel" />
+    <result column="sort" jdbcType="INTEGER" property="sort" />
+    <result column="status" jdbcType="INTEGER" property="status" />
+    <result column="publish_date" jdbcType="TIMESTAMP" property="publishDate" />
+    <result column="create_by" jdbcType="VARCHAR" property="createBy" />
+    <result column="create_date" jdbcType="TIMESTAMP" property="createDate" />
+    <result column="update_by" jdbcType="VARCHAR" property="updateBy" />
+    <result column="update_date" jdbcType="TIMESTAMP" property="updateDate" />
+  </resultMap>
+  <resultMap extends="BaseResultMap" id="ResultMapWithBLOBs" type="com.ark.hngxt.product.domain.CreditProductWithBLOBs">
+    <result column="description" jdbcType="LONGVARCHAR" property="description" />
+    <result column="feature" jdbcType="LONGVARCHAR" property="feature" />
+    <result column="apply_condition" jdbcType="LONGVARCHAR" property="applyCondition" />
+    <result column="apply_material" jdbcType="LONGVARCHAR" property="applyMaterial" />
+  </resultMap>
+  <sql id="Example_Where_Clause">
+    <where>
+      <foreach collection="oredCriteria" item="criteria" separator="or">
+        <if test="criteria.valid">
+          <trim prefix="(" prefixOverrides="and" suffix=")">
+            <foreach collection="criteria.criteria" item="criterion">
+              <choose>
+                <when test="criterion.noValue">
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue">
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue">
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue">
+                  and ${criterion.condition}
+                  <foreach close=")" collection="criterion.value" item="listItem" open="(" separator=",">
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Update_By_Example_Where_Clause">
+    <where>
+      <foreach collection="example.oredCriteria" item="criteria" separator="or">
+        <if test="criteria.valid">
+          <trim prefix="(" prefixOverrides="and" suffix=")">
+            <foreach collection="criteria.criteria" item="criterion">
+              <choose>
+                <when test="criterion.noValue">
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue">
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue">
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue">
+                  and ${criterion.condition}
+                  <foreach close=")" collection="criterion.value" item="listItem" open="(" separator=",">
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Base_Column_List">
+    id, name, type, organization, organization_id, parent_organization, parent_organization_id, 
+    amount_start, amount_end, interest_rate_start, interest_rate_end, limit_start, limit_end, 
+    credit_level, credit_level_code, img, be_hot, be_main_hot, be_main_hot_sort, be_main_hot_app, 
+    be_hot_app, be_main_hot_app_sort, be_top, apply_count, apply_rate, total_amount, 
+    apply_rate_true, total_amount_true, be_special, credit_model, rating_model, sort, 
+    status, publish_date, create_by, create_date, update_by, update_date
+  </sql>
+  <sql id="Blob_Column_List">
+    description, feature, apply_condition, apply_material
+  </sql>
+  <select id="selectByExampleWithBLOBs" parameterType="com.ark.hngxt.product.domain.CreditProductCriteria" resultMap="ResultMapWithBLOBs">
+    select
+    <if test="distinct">
+      distinct
+    </if>
+    <include refid="Base_Column_List" />
+    ,
+    <include refid="Blob_Column_List" />
+    from credit_product
+    <if test="_parameter != null">
+      <include refid="Example_Where_Clause" />
+    </if>
+    <if test="orderByClause != null">
+      order by ${orderByClause}
+    </if>
+  </select>
+  <select id="selectByExample" parameterType="com.ark.hngxt.product.domain.CreditProductCriteria" resultMap="BaseResultMap">
+    select
+    <if test="distinct">
+      distinct
+    </if>
+    <include refid="Base_Column_List" />
+    from credit_product
+    <if test="_parameter != null">
+      <include refid="Example_Where_Clause" />
+    </if>
+    <if test="orderByClause != null">
+      order by ${orderByClause}
+    </if>
+  </select>
+  <select id="selectByPrimaryKey" parameterType="java.lang.Long" resultMap="ResultMapWithBLOBs">
+    select 
+    <include refid="Base_Column_List" />
+    ,
+    <include refid="Blob_Column_List" />
+    from credit_product
+    where id = #{id,jdbcType=BIGINT}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Long">
+    delete from credit_product
+    where id = #{id,jdbcType=BIGINT}
+  </delete>
+  <delete id="deleteByExample" parameterType="com.ark.hngxt.product.domain.CreditProductCriteria">
+    delete from credit_product
+    <if test="_parameter != null">
+      <include refid="Example_Where_Clause" />
+    </if>
+  </delete>
+  <insert id="insert" parameterType="com.ark.hngxt.product.domain.CreditProductWithBLOBs">
+    insert into credit_product (id, name, type, 
+      organization, organization_id, parent_organization, 
+      parent_organization_id, amount_start, amount_end, 
+      interest_rate_start, interest_rate_end, limit_start, 
+      limit_end, credit_level, credit_level_code, 
+      img, be_hot, be_main_hot, 
+      be_main_hot_sort, be_main_hot_app, be_hot_app, 
+      be_main_hot_app_sort, be_top, apply_count, 
+      apply_rate, total_amount, apply_rate_true, 
+      total_amount_true, be_special, credit_model, 
+      rating_model, sort, status, 
+      publish_date, create_by, create_date, 
+      update_by, update_date, description, 
+      feature, apply_condition, apply_material
+      )
+    values (#{id,jdbcType=BIGINT}, #{name,jdbcType=VARCHAR}, #{type,jdbcType=VARCHAR}, 
+      #{organization,jdbcType=VARCHAR}, #{organizationId,jdbcType=BIGINT}, #{parentOrganization,jdbcType=VARCHAR}, 
+      #{parentOrganizationId,jdbcType=BIGINT}, #{amountStart,jdbcType=DECIMAL}, #{amountEnd,jdbcType=DECIMAL}, 
+      #{interestRateStart,jdbcType=DECIMAL}, #{interestRateEnd,jdbcType=DECIMAL}, #{limitStart,jdbcType=INTEGER}, 
+      #{limitEnd,jdbcType=INTEGER}, #{creditLevel,jdbcType=VARCHAR}, #{creditLevelCode,jdbcType=VARCHAR}, 
+      #{img,jdbcType=VARCHAR}, #{beHot,jdbcType=INTEGER}, #{beMainHot,jdbcType=INTEGER}, 
+      #{beMainHotSort,jdbcType=INTEGER}, #{beMainHotApp,jdbcType=INTEGER}, #{beHotApp,jdbcType=INTEGER}, 
+      #{beMainHotAppSort,jdbcType=INTEGER}, #{beTop,jdbcType=INTEGER}, #{applyCount,jdbcType=BIGINT}, 
+      #{applyRate,jdbcType=VARCHAR}, #{totalAmount,jdbcType=DECIMAL}, #{applyRateTrue,jdbcType=VARCHAR}, 
+      #{totalAmountTrue,jdbcType=DECIMAL}, #{beSpecial,jdbcType=INTEGER}, #{creditModel,jdbcType=VARCHAR}, 
+      #{ratingModel,jdbcType=VARCHAR}, #{sort,jdbcType=INTEGER}, #{status,jdbcType=INTEGER}, 
+      #{publishDate,jdbcType=TIMESTAMP}, #{createBy,jdbcType=VARCHAR}, #{createDate,jdbcType=TIMESTAMP}, 
+      #{updateBy,jdbcType=VARCHAR}, #{updateDate,jdbcType=TIMESTAMP}, #{description,jdbcType=LONGVARCHAR}, 
+      #{feature,jdbcType=LONGVARCHAR}, #{applyCondition,jdbcType=LONGVARCHAR}, #{applyMaterial,jdbcType=LONGVARCHAR}
+      )
+  </insert>
+  <insert id="insertSelective" useGeneratedKeys="true" keyColumn="id" keyProperty="id" parameterType="com.ark.hngxt.product.domain.CreditProductWithBLOBs">
+    insert into credit_product
+    <trim prefix="(" suffix=")" suffixOverrides=",">
+      <if test="id != null">
+        id,
+      </if>
+      <if test="name != null">
+        name,
+      </if>
+      <if test="type != null">
+        type,
+      </if>
+      <if test="organization != null">
+        organization,
+      </if>
+      <if test="organizationId != null">
+        organization_id,
+      </if>
+      <if test="parentOrganization != null">
+        parent_organization,
+      </if>
+      <if test="parentOrganizationId != null">
+        parent_organization_id,
+      </if>
+      <if test="amountStart != null">
+        amount_start,
+      </if>
+      <if test="amountEnd != null">
+        amount_end,
+      </if>
+      <if test="interestRateStart != null">
+        interest_rate_start,
+      </if>
+      <if test="interestRateEnd != null">
+        interest_rate_end,
+      </if>
+      <if test="limitStart != null">
+        limit_start,
+      </if>
+      <if test="limitEnd != null">
+        limit_end,
+      </if>
+      <if test="creditLevel != null">
+        credit_level,
+      </if>
+      <if test="creditLevelCode != null">
+        credit_level_code,
+      </if>
+      <if test="img != null">
+        img,
+      </if>
+      <if test="beHot != null">
+        be_hot,
+      </if>
+      <if test="beMainHot != null">
+        be_main_hot,
+      </if>
+      <if test="beMainHotSort != null">
+        be_main_hot_sort,
+      </if>
+      <if test="beMainHotApp != null">
+        be_main_hot_app,
+      </if>
+      <if test="beHotApp != null">
+        be_hot_app,
+      </if>
+      <if test="beMainHotAppSort != null">
+        be_main_hot_app_sort,
+      </if>
+      <if test="beTop != null">
+        be_top,
+      </if>
+      <if test="applyCount != null">
+        apply_count,
+      </if>
+      <if test="applyRate != null">
+        apply_rate,
+      </if>
+      <if test="totalAmount != null">
+        total_amount,
+      </if>
+      <if test="applyRateTrue != null">
+        apply_rate_true,
+      </if>
+      <if test="totalAmountTrue != null">
+        total_amount_true,
+      </if>
+      <if test="beSpecial != null">
+        be_special,
+      </if>
+      <if test="creditModel != null">
+        credit_model,
+      </if>
+      <if test="ratingModel != null">
+        rating_model,
+      </if>
+      <if test="sort != null">
+        sort,
+      </if>
+      <if test="status != null">
+        status,
+      </if>
+      <if test="publishDate != null">
+        publish_date,
+      </if>
+      <if test="createBy != null">
+        create_by,
+      </if>
+      <if test="createDate != null">
+        create_date,
+      </if>
+      <if test="updateBy != null">
+        update_by,
+      </if>
+      <if test="updateDate != null">
+        update_date,
+      </if>
+      <if test="description != null">
+        description,
+      </if>
+      <if test="feature != null">
+        feature,
+      </if>
+      <if test="applyCondition != null">
+        apply_condition,
+      </if>
+      <if test="applyMaterial != null">
+        apply_material,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides=",">
+      <if test="id != null">
+        #{id,jdbcType=BIGINT},
+      </if>
+      <if test="name != null">
+        #{name,jdbcType=VARCHAR},
+      </if>
+      <if test="type != null">
+        #{type,jdbcType=VARCHAR},
+      </if>
+      <if test="organization != null">
+        #{organization,jdbcType=VARCHAR},
+      </if>
+      <if test="organizationId != null">
+        #{organizationId,jdbcType=BIGINT},
+      </if>
+      <if test="parentOrganization != null">
+        #{parentOrganization,jdbcType=VARCHAR},
+      </if>
+      <if test="parentOrganizationId != null">
+        #{parentOrganizationId,jdbcType=BIGINT},
+      </if>
+      <if test="amountStart != null">
+        #{amountStart,jdbcType=DECIMAL},
+      </if>
+      <if test="amountEnd != null">
+        #{amountEnd,jdbcType=DECIMAL},
+      </if>
+      <if test="interestRateStart != null">
+        #{interestRateStart,jdbcType=DECIMAL},
+      </if>
+      <if test="interestRateEnd != null">
+        #{interestRateEnd,jdbcType=DECIMAL},
+      </if>
+      <if test="limitStart != null">
+        #{limitStart,jdbcType=INTEGER},
+      </if>
+      <if test="limitEnd != null">
+        #{limitEnd,jdbcType=INTEGER},
+      </if>
+      <if test="creditLevel != null">
+        #{creditLevel,jdbcType=VARCHAR},
+      </if>
+      <if test="creditLevelCode != null">
+        #{creditLevelCode,jdbcType=VARCHAR},
+      </if>
+      <if test="img != null">
+        #{img,jdbcType=VARCHAR},
+      </if>
+      <if test="beHot != null">
+        #{beHot,jdbcType=INTEGER},
+      </if>
+      <if test="beMainHot != null">
+        #{beMainHot,jdbcType=INTEGER},
+      </if>
+      <if test="beMainHotSort != null">
+        #{beMainHotSort,jdbcType=INTEGER},
+      </if>
+      <if test="beMainHotApp != null">
+        #{beMainHotApp,jdbcType=INTEGER},
+      </if>
+      <if test="beHotApp != null">
+        #{beHotApp,jdbcType=INTEGER},
+      </if>
+      <if test="beMainHotAppSort != null">
+        #{beMainHotAppSort,jdbcType=INTEGER},
+      </if>
+      <if test="beTop != null">
+        #{beTop,jdbcType=INTEGER},
+      </if>
+      <if test="applyCount != null">
+        #{applyCount,jdbcType=BIGINT},
+      </if>
+      <if test="applyRate != null">
+        #{applyRate,jdbcType=VARCHAR},
+      </if>
+      <if test="totalAmount != null">
+        #{totalAmount,jdbcType=DECIMAL},
+      </if>
+      <if test="applyRateTrue != null">
+        #{applyRateTrue,jdbcType=VARCHAR},
+      </if>
+      <if test="totalAmountTrue != null">
+        #{totalAmountTrue,jdbcType=DECIMAL},
+      </if>
+      <if test="beSpecial != null">
+        #{beSpecial,jdbcType=INTEGER},
+      </if>
+      <if test="creditModel != null">
+        #{creditModel,jdbcType=VARCHAR},
+      </if>
+      <if test="ratingModel != null">
+        #{ratingModel,jdbcType=VARCHAR},
+      </if>
+      <if test="sort != null">
+        #{sort,jdbcType=INTEGER},
+      </if>
+      <if test="status != null">
+        #{status,jdbcType=INTEGER},
+      </if>
+      <if test="publishDate != null">
+        #{publishDate,jdbcType=TIMESTAMP},
+      </if>
+      <if test="createBy != null">
+        #{createBy,jdbcType=VARCHAR},
+      </if>
+      <if test="createDate != null">
+        #{createDate,jdbcType=TIMESTAMP},
+      </if>
+      <if test="updateBy != null">
+        #{updateBy,jdbcType=VARCHAR},
+      </if>
+      <if test="updateDate != null">
+        #{updateDate,jdbcType=TIMESTAMP},
+      </if>
+      <if test="description != null">
+        #{description,jdbcType=LONGVARCHAR},
+      </if>
+      <if test="feature != null">
+        #{feature,jdbcType=LONGVARCHAR},
+      </if>
+      <if test="applyCondition != null">
+        #{applyCondition,jdbcType=LONGVARCHAR},
+      </if>
+      <if test="applyMaterial != null">
+        #{applyMaterial,jdbcType=LONGVARCHAR},
+      </if>
+    </trim>
+  </insert>
+  <select id="countByExample" parameterType="com.ark.hngxt.product.domain.CreditProductCriteria" resultType="java.lang.Long">
+    select count(*) from credit_product
+    <if test="_parameter != null">
+      <include refid="Example_Where_Clause" />
+    </if>
+  </select>
+  <update id="updateByExampleSelective" parameterType="map">
+    update credit_product
+    <set>
+      <if test="record.id != null">
+        id = #{record.id,jdbcType=BIGINT},
+      </if>
+      <if test="record.name != null">
+        name = #{record.name,jdbcType=VARCHAR},
+      </if>
+      <if test="record.type != null">
+        type = #{record.type,jdbcType=VARCHAR},
+      </if>
+      <if test="record.organization != null">
+        organization = #{record.organization,jdbcType=VARCHAR},
+      </if>
+      <if test="record.organizationId != null">
+        organization_id = #{record.organizationId,jdbcType=BIGINT},
+      </if>
+      <if test="record.parentOrganization != null">
+        parent_organization = #{record.parentOrganization,jdbcType=VARCHAR},
+      </if>
+      <if test="record.parentOrganizationId != null">
+        parent_organization_id = #{record.parentOrganizationId,jdbcType=BIGINT},
+      </if>
+      <if test="record.amountStart != null">
+        amount_start = #{record.amountStart,jdbcType=DECIMAL},
+      </if>
+      <if test="record.amountEnd != null">
+        amount_end = #{record.amountEnd,jdbcType=DECIMAL},
+      </if>
+      <if test="record.interestRateStart != null">
+        interest_rate_start = #{record.interestRateStart,jdbcType=DECIMAL},
+      </if>
+      <if test="record.interestRateEnd != null">
+        interest_rate_end = #{record.interestRateEnd,jdbcType=DECIMAL},
+      </if>
+      <if test="record.limitStart != null">
+        limit_start = #{record.limitStart,jdbcType=INTEGER},
+      </if>
+      <if test="record.limitEnd != null">
+        limit_end = #{record.limitEnd,jdbcType=INTEGER},
+      </if>
+      <if test="record.creditLevel != null">
+        credit_level = #{record.creditLevel,jdbcType=VARCHAR},
+      </if>
+      <if test="record.creditLevelCode != null">
+        credit_level_code = #{record.creditLevelCode,jdbcType=VARCHAR},
+      </if>
+      <if test="record.img != null">
+        img = #{record.img,jdbcType=VARCHAR},
+      </if>
+      <if test="record.beHot != null">
+        be_hot = #{record.beHot,jdbcType=INTEGER},
+      </if>
+      <if test="record.beMainHot != null">
+        be_main_hot = #{record.beMainHot,jdbcType=INTEGER},
+      </if>
+      <if test="record.beMainHotSort != null">
+        be_main_hot_sort = #{record.beMainHotSort,jdbcType=INTEGER},
+      </if>
+      <if test="record.beMainHotApp != null">
+        be_main_hot_app = #{record.beMainHotApp,jdbcType=INTEGER},
+      </if>
+      <if test="record.beHotApp != null">
+        be_hot_app = #{record.beHotApp,jdbcType=INTEGER},
+      </if>
+      <if test="record.beMainHotAppSort != null">
+        be_main_hot_app_sort = #{record.beMainHotAppSort,jdbcType=INTEGER},
+      </if>
+      <if test="record.beTop != null">
+        be_top = #{record.beTop,jdbcType=INTEGER},
+      </if>
+      <if test="record.applyCount != null">
+        apply_count = #{record.applyCount,jdbcType=BIGINT},
+      </if>
+      <if test="record.applyRate != null">
+        apply_rate = #{record.applyRate,jdbcType=VARCHAR},
+      </if>
+      <if test="record.totalAmount != null">
+        total_amount = #{record.totalAmount,jdbcType=DECIMAL},
+      </if>
+      <if test="record.applyRateTrue != null">
+        apply_rate_true = #{record.applyRateTrue,jdbcType=VARCHAR},
+      </if>
+      <if test="record.totalAmountTrue != null">
+        total_amount_true = #{record.totalAmountTrue,jdbcType=DECIMAL},
+      </if>
+      <if test="record.beSpecial != null">
+        be_special = #{record.beSpecial,jdbcType=INTEGER},
+      </if>
+      <if test="record.creditModel != null">
+        credit_model = #{record.creditModel,jdbcType=VARCHAR},
+      </if>
+      <if test="record.ratingModel != null">
+        rating_model = #{record.ratingModel,jdbcType=VARCHAR},
+      </if>
+      <if test="record.sort != null">
+        sort = #{record.sort,jdbcType=INTEGER},
+      </if>
+      <if test="record.status != null">
+        status = #{record.status,jdbcType=INTEGER},
+      </if>
+      <if test="record.publishDate != null">
+        publish_date = #{record.publishDate,jdbcType=TIMESTAMP},
+      </if>
+      <if test="record.createBy != null">
+        create_by = #{record.createBy,jdbcType=VARCHAR},
+      </if>
+      <if test="record.createDate != null">
+        create_date = #{record.createDate,jdbcType=TIMESTAMP},
+      </if>
+      <if test="record.updateBy != null">
+        update_by = #{record.updateBy,jdbcType=VARCHAR},
+      </if>
+      <if test="record.updateDate != null">
+        update_date = #{record.updateDate,jdbcType=TIMESTAMP},
+      </if>
+      <if test="record.description != null">
+        description = #{record.description,jdbcType=LONGVARCHAR},
+      </if>
+      <if test="record.feature != null">
+        feature = #{record.feature,jdbcType=LONGVARCHAR},
+      </if>
+      <if test="record.applyCondition != null">
+        apply_condition = #{record.applyCondition,jdbcType=LONGVARCHAR},
+      </if>
+      <if test="record.applyMaterial != null">
+        apply_material = #{record.applyMaterial,jdbcType=LONGVARCHAR},
+      </if>
+    </set>
+    <if test="_parameter != null">
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByExampleWithBLOBs" parameterType="map">
+    update credit_product
+    set id = #{record.id,jdbcType=BIGINT},
+      name = #{record.name,jdbcType=VARCHAR},
+      type = #{record.type,jdbcType=VARCHAR},
+      organization = #{record.organization,jdbcType=VARCHAR},
+      organization_id = #{record.organizationId,jdbcType=BIGINT},
+      parent_organization = #{record.parentOrganization,jdbcType=VARCHAR},
+      parent_organization_id = #{record.parentOrganizationId,jdbcType=BIGINT},
+      amount_start = #{record.amountStart,jdbcType=DECIMAL},
+      amount_end = #{record.amountEnd,jdbcType=DECIMAL},
+      interest_rate_start = #{record.interestRateStart,jdbcType=DECIMAL},
+      interest_rate_end = #{record.interestRateEnd,jdbcType=DECIMAL},
+      limit_start = #{record.limitStart,jdbcType=INTEGER},
+      limit_end = #{record.limitEnd,jdbcType=INTEGER},
+      credit_level = #{record.creditLevel,jdbcType=VARCHAR},
+      credit_level_code = #{record.creditLevelCode,jdbcType=VARCHAR},
+      img = #{record.img,jdbcType=VARCHAR},
+      be_hot = #{record.beHot,jdbcType=INTEGER},
+      be_main_hot = #{record.beMainHot,jdbcType=INTEGER},
+      be_main_hot_sort = #{record.beMainHotSort,jdbcType=INTEGER},
+      be_main_hot_app = #{record.beMainHotApp,jdbcType=INTEGER},
+      be_hot_app = #{record.beHotApp,jdbcType=INTEGER},
+      be_main_hot_app_sort = #{record.beMainHotAppSort,jdbcType=INTEGER},
+      be_top = #{record.beTop,jdbcType=INTEGER},
+      apply_count = #{record.applyCount,jdbcType=BIGINT},
+      apply_rate = #{record.applyRate,jdbcType=VARCHAR},
+      total_amount = #{record.totalAmount,jdbcType=DECIMAL},
+      apply_rate_true = #{record.applyRateTrue,jdbcType=VARCHAR},
+      total_amount_true = #{record.totalAmountTrue,jdbcType=DECIMAL},
+      be_special = #{record.beSpecial,jdbcType=INTEGER},
+      credit_model = #{record.creditModel,jdbcType=VARCHAR},
+      rating_model = #{record.ratingModel,jdbcType=VARCHAR},
+      sort = #{record.sort,jdbcType=INTEGER},
+      status = #{record.status,jdbcType=INTEGER},
+      publish_date = #{record.publishDate,jdbcType=TIMESTAMP},
+      create_by = #{record.createBy,jdbcType=VARCHAR},
+      create_date = #{record.createDate,jdbcType=TIMESTAMP},
+      update_by = #{record.updateBy,jdbcType=VARCHAR},
+      update_date = #{record.updateDate,jdbcType=TIMESTAMP},
+      description = #{record.description,jdbcType=LONGVARCHAR},
+      feature = #{record.feature,jdbcType=LONGVARCHAR},
+      apply_condition = #{record.applyCondition,jdbcType=LONGVARCHAR},
+      apply_material = #{record.applyMaterial,jdbcType=LONGVARCHAR}
+    <if test="_parameter != null">
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByExample" parameterType="map">
+    update credit_product
+    set id = #{record.id,jdbcType=BIGINT},
+      name = #{record.name,jdbcType=VARCHAR},
+      type = #{record.type,jdbcType=VARCHAR},
+      organization = #{record.organization,jdbcType=VARCHAR},
+      organization_id = #{record.organizationId,jdbcType=BIGINT},
+      parent_organization = #{record.parentOrganization,jdbcType=VARCHAR},
+      parent_organization_id = #{record.parentOrganizationId,jdbcType=BIGINT},
+      amount_start = #{record.amountStart,jdbcType=DECIMAL},
+      amount_end = #{record.amountEnd,jdbcType=DECIMAL},
+      interest_rate_start = #{record.interestRateStart,jdbcType=DECIMAL},
+      interest_rate_end = #{record.interestRateEnd,jdbcType=DECIMAL},
+      limit_start = #{record.limitStart,jdbcType=INTEGER},
+      limit_end = #{record.limitEnd,jdbcType=INTEGER},
+      credit_level = #{record.creditLevel,jdbcType=VARCHAR},
+      credit_level_code = #{record.creditLevelCode,jdbcType=VARCHAR},
+      img = #{record.img,jdbcType=VARCHAR},
+      be_hot = #{record.beHot,jdbcType=INTEGER},
+      be_main_hot = #{record.beMainHot,jdbcType=INTEGER},
+      be_main_hot_sort = #{record.beMainHotSort,jdbcType=INTEGER},
+      be_main_hot_app = #{record.beMainHotApp,jdbcType=INTEGER},
+      be_hot_app = #{record.beHotApp,jdbcType=INTEGER},
+      be_main_hot_app_sort = #{record.beMainHotAppSort,jdbcType=INTEGER},
+      be_top = #{record.beTop,jdbcType=INTEGER},
+      apply_count = #{record.applyCount,jdbcType=BIGINT},
+      apply_rate = #{record.applyRate,jdbcType=VARCHAR},
+      total_amount = #{record.totalAmount,jdbcType=DECIMAL},
+      apply_rate_true = #{record.applyRateTrue,jdbcType=VARCHAR},
+      total_amount_true = #{record.totalAmountTrue,jdbcType=DECIMAL},
+      be_special = #{record.beSpecial,jdbcType=INTEGER},
+      credit_model = #{record.creditModel,jdbcType=VARCHAR},
+      rating_model = #{record.ratingModel,jdbcType=VARCHAR},
+      sort = #{record.sort,jdbcType=INTEGER},
+      status = #{record.status,jdbcType=INTEGER},
+      publish_date = #{record.publishDate,jdbcType=TIMESTAMP},
+      create_by = #{record.createBy,jdbcType=VARCHAR},
+      create_date = #{record.createDate,jdbcType=TIMESTAMP},
+      update_by = #{record.updateBy,jdbcType=VARCHAR},
+      update_date = #{record.updateDate,jdbcType=TIMESTAMP}
+    <if test="_parameter != null">
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByPrimaryKeySelective" parameterType="com.ark.hngxt.product.domain.CreditProductWithBLOBs">
+    update credit_product
+    <set>
+      <if test="name != null">
+        name = #{name,jdbcType=VARCHAR},
+      </if>
+      <if test="type != null">
+        type = #{type,jdbcType=VARCHAR},
+      </if>
+      <if test="organization != null">
+        organization = #{organization,jdbcType=VARCHAR},
+      </if>
+      <if test="organizationId != null">
+        organization_id = #{organizationId,jdbcType=BIGINT},
+      </if>
+      <if test="parentOrganization != null">
+        parent_organization = #{parentOrganization,jdbcType=VARCHAR},
+      </if>
+      <if test="parentOrganizationId != null">
+        parent_organization_id = #{parentOrganizationId,jdbcType=BIGINT},
+      </if>
+      <if test="amountStart != null">
+        amount_start = #{amountStart,jdbcType=DECIMAL},
+      </if>
+      <if test="amountEnd != null">
+        amount_end = #{amountEnd,jdbcType=DECIMAL},
+      </if>
+      <if test="interestRateStart != null">
+        interest_rate_start = #{interestRateStart,jdbcType=DECIMAL},
+      </if>
+      <if test="interestRateEnd != null">
+        interest_rate_end = #{interestRateEnd,jdbcType=DECIMAL},
+      </if>
+      <if test="limitStart != null">
+        limit_start = #{limitStart,jdbcType=INTEGER},
+      </if>
+      <if test="limitEnd != null">
+        limit_end = #{limitEnd,jdbcType=INTEGER},
+      </if>
+      <if test="creditLevel != null">
+        credit_level = #{creditLevel,jdbcType=VARCHAR},
+      </if>
+      <if test="creditLevelCode != null">
+        credit_level_code = #{creditLevelCode,jdbcType=VARCHAR},
+      </if>
+      <if test="img != null">
+        img = #{img,jdbcType=VARCHAR},
+      </if>
+      <if test="beHot != null">
+        be_hot = #{beHot,jdbcType=INTEGER},
+      </if>
+      <if test="beMainHot != null">
+        be_main_hot = #{beMainHot,jdbcType=INTEGER},
+      </if>
+      <if test="beMainHotSort != null">
+        be_main_hot_sort = #{beMainHotSort,jdbcType=INTEGER},
+      </if>
+      <if test="beMainHotApp != null">
+        be_main_hot_app = #{beMainHotApp,jdbcType=INTEGER},
+      </if>
+      <if test="beHotApp != null">
+        be_hot_app = #{beHotApp,jdbcType=INTEGER},
+      </if>
+      <if test="beMainHotAppSort != null">
+        be_main_hot_app_sort = #{beMainHotAppSort,jdbcType=INTEGER},
+      </if>
+      <if test="beTop != null">
+        be_top = #{beTop,jdbcType=INTEGER},
+      </if>
+      <if test="applyCount != null">
+        apply_count = #{applyCount,jdbcType=BIGINT},
+      </if>
+      <if test="applyRate != null">
+        apply_rate = #{applyRate,jdbcType=VARCHAR},
+      </if>
+      <if test="totalAmount != null">
+        total_amount = #{totalAmount,jdbcType=DECIMAL},
+      </if>
+      <if test="applyRateTrue != null">
+        apply_rate_true = #{applyRateTrue,jdbcType=VARCHAR},
+      </if>
+      <if test="totalAmountTrue != null">
+        total_amount_true = #{totalAmountTrue,jdbcType=DECIMAL},
+      </if>
+      <if test="beSpecial != null">
+        be_special = #{beSpecial,jdbcType=INTEGER},
+      </if>
+      <if test="creditModel != null">
+        credit_model = #{creditModel,jdbcType=VARCHAR},
+      </if>
+      <if test="ratingModel != null">
+        rating_model = #{ratingModel,jdbcType=VARCHAR},
+      </if>
+      <if test="sort != null">
+        sort = #{sort,jdbcType=INTEGER},
+      </if>
+      <if test="status != null">
+        status = #{status,jdbcType=INTEGER},
+      </if>
+      <if test="publishDate != null">
+        publish_date = #{publishDate,jdbcType=TIMESTAMP},
+      </if>
+      <if test="createBy != null">
+        create_by = #{createBy,jdbcType=VARCHAR},
+      </if>
+      <if test="createDate != null">
+        create_date = #{createDate,jdbcType=TIMESTAMP},
+      </if>
+      <if test="updateBy != null">
+        update_by = #{updateBy,jdbcType=VARCHAR},
+      </if>
+      <if test="updateDate != null">
+        update_date = #{updateDate,jdbcType=TIMESTAMP},
+      </if>
+      <if test="description != null">
+        description = #{description,jdbcType=LONGVARCHAR},
+      </if>
+      <if test="feature != null">
+        feature = #{feature,jdbcType=LONGVARCHAR},
+      </if>
+      <if test="applyCondition != null">
+        apply_condition = #{applyCondition,jdbcType=LONGVARCHAR},
+      </if>
+      <if test="applyMaterial != null">
+        apply_material = #{applyMaterial,jdbcType=LONGVARCHAR},
+      </if>
+    </set>
+    where id = #{id,jdbcType=BIGINT}
+  </update>
+  <update id="updateByPrimaryKeyWithBLOBs" parameterType="com.ark.hngxt.product.domain.CreditProductWithBLOBs">
+    update credit_product
+    set name = #{name,jdbcType=VARCHAR},
+      type = #{type,jdbcType=VARCHAR},
+      organization = #{organization,jdbcType=VARCHAR},
+      organization_id = #{organizationId,jdbcType=BIGINT},
+      parent_organization = #{parentOrganization,jdbcType=VARCHAR},
+      parent_organization_id = #{parentOrganizationId,jdbcType=BIGINT},
+      amount_start = #{amountStart,jdbcType=DECIMAL},
+      amount_end = #{amountEnd,jdbcType=DECIMAL},
+      interest_rate_start = #{interestRateStart,jdbcType=DECIMAL},
+      interest_rate_end = #{interestRateEnd,jdbcType=DECIMAL},
+      limit_start = #{limitStart,jdbcType=INTEGER},
+      limit_end = #{limitEnd,jdbcType=INTEGER},
+      credit_level = #{creditLevel,jdbcType=VARCHAR},
+      credit_level_code = #{creditLevelCode,jdbcType=VARCHAR},
+      img = #{img,jdbcType=VARCHAR},
+      be_hot = #{beHot,jdbcType=INTEGER},
+      be_main_hot = #{beMainHot,jdbcType=INTEGER},
+      be_main_hot_sort = #{beMainHotSort,jdbcType=INTEGER},
+      be_main_hot_app = #{beMainHotApp,jdbcType=INTEGER},
+      be_hot_app = #{beHotApp,jdbcType=INTEGER},
+      be_main_hot_app_sort = #{beMainHotAppSort,jdbcType=INTEGER},
+      be_top = #{beTop,jdbcType=INTEGER},
+      apply_count = #{applyCount,jdbcType=BIGINT},
+      apply_rate = #{applyRate,jdbcType=VARCHAR},
+      total_amount = #{totalAmount,jdbcType=DECIMAL},
+      apply_rate_true = #{applyRateTrue,jdbcType=VARCHAR},
+      total_amount_true = #{totalAmountTrue,jdbcType=DECIMAL},
+      be_special = #{beSpecial,jdbcType=INTEGER},
+      credit_model = #{creditModel,jdbcType=VARCHAR},
+      rating_model = #{ratingModel,jdbcType=VARCHAR},
+      sort = #{sort,jdbcType=INTEGER},
+      status = #{status,jdbcType=INTEGER},
+      publish_date = #{publishDate,jdbcType=TIMESTAMP},
+      create_by = #{createBy,jdbcType=VARCHAR},
+      create_date = #{createDate,jdbcType=TIMESTAMP},
+      update_by = #{updateBy,jdbcType=VARCHAR},
+      update_date = #{updateDate,jdbcType=TIMESTAMP},
+      description = #{description,jdbcType=LONGVARCHAR},
+      feature = #{feature,jdbcType=LONGVARCHAR},
+      apply_condition = #{applyCondition,jdbcType=LONGVARCHAR},
+      apply_material = #{applyMaterial,jdbcType=LONGVARCHAR}
+    where id = #{id,jdbcType=BIGINT}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.ark.hngxt.product.domain.CreditProduct">
+    update credit_product
+    set name = #{name,jdbcType=VARCHAR},
+      type = #{type,jdbcType=VARCHAR},
+      organization = #{organization,jdbcType=VARCHAR},
+      organization_id = #{organizationId,jdbcType=BIGINT},
+      parent_organization = #{parentOrganization,jdbcType=VARCHAR},
+      parent_organization_id = #{parentOrganizationId,jdbcType=BIGINT},
+      amount_start = #{amountStart,jdbcType=DECIMAL},
+      amount_end = #{amountEnd,jdbcType=DECIMAL},
+      interest_rate_start = #{interestRateStart,jdbcType=DECIMAL},
+      interest_rate_end = #{interestRateEnd,jdbcType=DECIMAL},
+      limit_start = #{limitStart,jdbcType=INTEGER},
+      limit_end = #{limitEnd,jdbcType=INTEGER},
+      credit_level = #{creditLevel,jdbcType=VARCHAR},
+      credit_level_code = #{creditLevelCode,jdbcType=VARCHAR},
+      img = #{img,jdbcType=VARCHAR},
+      be_hot = #{beHot,jdbcType=INTEGER},
+      be_main_hot = #{beMainHot,jdbcType=INTEGER},
+      be_main_hot_sort = #{beMainHotSort,jdbcType=INTEGER},
+      be_main_hot_app = #{beMainHotApp,jdbcType=INTEGER},
+      be_hot_app = #{beHotApp,jdbcType=INTEGER},
+      be_main_hot_app_sort = #{beMainHotAppSort,jdbcType=INTEGER},
+      be_top = #{beTop,jdbcType=INTEGER},
+      apply_count = #{applyCount,jdbcType=BIGINT},
+      apply_rate = #{applyRate,jdbcType=VARCHAR},
+      total_amount = #{totalAmount,jdbcType=DECIMAL},
+      apply_rate_true = #{applyRateTrue,jdbcType=VARCHAR},
+      total_amount_true = #{totalAmountTrue,jdbcType=DECIMAL},
+      be_special = #{beSpecial,jdbcType=INTEGER},
+      credit_model = #{creditModel,jdbcType=VARCHAR},
+      rating_model = #{ratingModel,jdbcType=VARCHAR},
+      sort = #{sort,jdbcType=INTEGER},
+      status = #{status,jdbcType=INTEGER},
+      publish_date = #{publishDate,jdbcType=TIMESTAMP},
+      create_by = #{createBy,jdbcType=VARCHAR},
+      create_date = #{createDate,jdbcType=TIMESTAMP},
+      update_by = #{updateBy,jdbcType=VARCHAR},
+      update_date = #{updateDate,jdbcType=TIMESTAMP}
+    where id = #{id,jdbcType=BIGINT}
+  </update>
+</mapper>

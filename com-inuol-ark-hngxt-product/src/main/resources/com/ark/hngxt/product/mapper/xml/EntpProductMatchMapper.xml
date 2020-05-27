@@ -1,0 +1,21 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.ark.hngxt.product.mapper.EntpProductMatchMapper">
+
+ <select id="queryMatchProducList" resultType="com.ark.hngxt.product.model.ProductIntelligentMatchVO">
+	SELECT p.*  FROM `entp_product_match` t
+	JOIN (
+	SELECT t.`id`,'1' AS orderType,t.`name`,t.`img`,t.`organization_id` AS organizationId ,t.`parent_organization_id` AS parentOrganizationId,
+	t.`amount_start` AS amountStart,t.`amount_end` AS amountEnd,t.`interest_rate_start` AS interestRateStart,t.`interest_rate_end` AS interestRateEnd,
+	t.`limit_start` AS limitStart,t.`limit_end` AS limitEnd,'' AS tag,t.`description`,t.`feature`,t.`apply_count` AS applyCount ,t.`total_amount` AS totalAmount,t.`publish_date` AS publishDate
+	FROM `credit_product` t WHERE t.`status`=1
+	UNION ALL
+	SELECT t.`id`,'2' AS orderType,t.`name`,t.`img`,t.`organization_id` AS organizationId ,t.`parent_organization_id` AS parentOrganizationId,
+	t.`amount_start` AS amountStart,t.`amount_end` AS amountEnd,t.`interest_rate_start` AS interestRateStart,t.`interest_rate_end` AS interestRateEnd,
+	t.`limit_start` AS limitStart,t.`limit_end` AS limitEnd,'' AS tag,t.`description`,t.`feature`,t.`apply_count` AS applyCount ,t.`total_amount` AS totalAmount,t.`publish_date` AS publishDate
+	FROM `finance_product` t WHERE t.`status`=1
+	) p ON p.id=t.`product_id` AND t.`product_type`=p.orderType
+	WHERE t.`entp_id`=#{entpId} AND t.`status`=1 AND t.`match_count`>0 ORDER BY t.match_count DESC,p.applyCount DESC,p.totalAmount DESC,p.publishDate DESC
+ </select>
+
+</mapper>

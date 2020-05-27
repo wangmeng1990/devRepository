@@ -1,0 +1,11 @@
+# 开发环境：java -jar my-spring-boot.jar --spring.cloud.config.name=com-ark-hngxt-product-0 --spring.cloud.config.label=master --spring.cloud.config.profile=dev
+# 测试环境：java -jar my-spring-boot.jar --spring.cloud.config.name=com-ark-hngxt-product-0 --spring.cloud.config.label=master --spring.cloud.config.profile=test
+# 生产环境：java -jar my-spring-boot.jar --spring.cloud.config.name=com-ark-hngxt-product-0 --spring.cloud.config.label=master --spring.cloud.config.profile=prod 
+
+spring: 
+   cloud: 
+      config:
+         label: master
+         uri: http://172.16.8.114:6100,http://172.16.8.115:6100
+         profile: prod
+         name: com-ark-hngxt-product-0

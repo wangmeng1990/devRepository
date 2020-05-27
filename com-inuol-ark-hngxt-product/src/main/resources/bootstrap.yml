@@ -1,0 +1,14 @@
+# 开发环境：java -jar my-spring-boot.jar --spring.cloud.config.name=com-ark-hngxt-product-0 --spring.cloud.config.label=master --spring.cloud.config.profile=dev
+# 测试环境：java -jar my-spring-boot.jar --spring.cloud.config.name=com-ark-hngxt-product-0 --spring.cloud.config.label=master --spring.cloud.config.profile=test
+# 生产环境：java -jar my-spring-boot.jar --spring.cloud.config.name=com-ark-hngxt-product-0 --spring.cloud.config.label=master --spring.cloud.config.profile=prod 
+
+spring:
+  profiles:
+    active:
+    - ${spring.cloud.config.profile:dev}
+    
+management:
+  endpoints:
+    web:
+      exposure:
+        include: '*'

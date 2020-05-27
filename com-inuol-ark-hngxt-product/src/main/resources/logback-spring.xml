@@ -1,0 +1,41 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<configuration>
+
+	<!--日志存储位置（读取配置文件的路径） -->
+	<springProperty scope="context" name="log_dir"
+		source="logging.path" />
+
+	<include
+		resource="org/springframework/boot/logging/logback/defaults.xml" />
+	<property name="LOG_FILE"
+		value="${LOG_FILE:-${LOG_PATH:-${LOG_TEMP:-${java.io.tmpdir:-/tmp}}}/spring.log}" />
+	<include
+		resource="org/springframework/boot/logging/logback/console-appender.xml" />
+	<include
+		resource="org/springframework/boot/logging/logback/file-appender.xml" />
+
+	<!-- 测试环境+开发环境. 多个使用逗号隔开. -->
+	<springProfile name="dev">
+		<root level="INFO">
+			<appender-ref ref="CONSOLE" />
+			<appender-ref ref="FILE" />
+		</root>
+		<logger name="com.netflix.discovery" additivity="false" level="info">
+			<appender-ref ref="FILE" />
+    	</logger>
+	</springProfile>
+	<springProfile name="test">
+		<root level="INFO">
+			<appender-ref ref="CONSOLE" />
+			<appender-ref ref="FILE" />
+		</root>
+	</springProfile>
+	<!-- 生产环境. -->
+	<springProfile name="prod">
+		<root level="INFO">
+			<!--<appender-ref ref="CONSOLE" /> 生产环境请注释此行 -->
+			<appender-ref ref="FILE" />
+		</root>
+	</springProfile>
+
+</configuration>
