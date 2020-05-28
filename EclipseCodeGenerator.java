@@ -1,4 +1,4 @@
-package com.yinuo.framework.generator;
+package *.generator;
 
 import java.util.Scanner;
 
@@ -19,9 +19,9 @@ public class EclipseCodeGenerator {
 	private static final String TYPE_ENTITY = "entity";
 	private static final String TYPE_INTERFACE = "interface";
 	
-	private static String url = "jdbc:mysql://115.29.175.45:3306/square?useUnicode=true&characterEncoding=UTF8&noAccessToProcedureBodies=true&allowMultiQueries=true";
-	private static String user = "square2019";
-	private static String pass = "square@2019$$";
+	private static String url = "";
+	private static String user = "";
+	private static String pass = "";
 	private static String driver = "com.mysql.jdbc.Driver";
 
 	public static String scanner(String tip) {
@@ -65,10 +65,10 @@ public class EclipseCodeGenerator {
 			gc.setFileOverride(true);
 		}
 		if (TYPE_ENTITY.equals(type)) {
-			gc.setOutputDir(projectPath.replace("yinuo-framework-user", "yinuo-framework-pojo") + "/src/main/java");
+			gc.setOutputDir(projectPath.replace("*-user", "*-pojo") + "/src/main/java");
 		}
 		if (TYPE_INTERFACE.equals(type)) {
-			gc.setOutputDir(projectPath.replace("yinuo-framework-user", "yinuo-framework-interface") + "/src/main/java");
+			gc.setOutputDir(projectPath.replace("*-user", "*-interface") + "/src/main/java");
 		}
 		gc.setAuthor("wangm");
 		gc.setOpen(false);
@@ -92,7 +92,7 @@ public class EclipseCodeGenerator {
 
 		// 策略配置
 		StrategyConfig strategy = new StrategyConfig();
-		strategy.setSuperEntityClass("com.yinuo.framework.entity.BaseModel");
+		strategy.setSuperEntityClass("*.entity.BaseModel");
 		strategy.setNaming(NamingStrategy.underline_to_camel);
 		strategy.setColumnNaming(NamingStrategy.underline_to_camel);
 		strategy.setEntityLombokModel(true);
