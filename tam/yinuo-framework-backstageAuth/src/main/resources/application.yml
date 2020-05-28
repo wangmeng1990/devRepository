@@ -1,9 +1,0 @@
-server:
-  port: 8088
-
-#数据库配置
-spring:
-  application:
-    name: yinuo-backstageAuth #指定服务名
-  profiles:
-    active: dev
